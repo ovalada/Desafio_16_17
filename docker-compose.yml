@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+  mongo:
+    image: "mongo:latest"
+  nginx:
+    image: "nginx:alpine"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web
+
