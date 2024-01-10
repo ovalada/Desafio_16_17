@@ -1,4 +1,4 @@
-name: Docker CI/CD
+name: Build and Push Docker Image
 
 on:
   push:
@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/desafio_16_17:latest .
+    - name: Build Docker Image
+      run: docker build -t tu_usuario/desafio_16_17:latest .
 
-    - name: Login to Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login to DockerHub
+      run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u tu_usuario --password-stdin
 
-    - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/desafio_16_17:latest
+    - name: Push Docker Image
+      run: docker push tu_usuario/desafio_16_17:latest
